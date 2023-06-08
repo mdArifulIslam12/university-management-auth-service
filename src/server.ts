@@ -1,29 +1,43 @@
-import mongoose from 'mongoose'
-import app from './app'
-import config from './config/index'
-import { logger, errorlogger } from './shared/logger'
-import { Server } from 'http'
+import { Server } from 'http';
+import mongoose from 'mongoose';
+import app from './app';
+import config from './config/index';
+import { logger, errorlogger } from './shared/logger';
+
+process.on('uncaughtException', error => {
+  errorlogger.error(error.message);
+  process.exit(1);
+});
+
+let server: Server;
 
 async function bootstrap(): Promise<void> {
-  let server: Server
   try {
-    await mongoose.connect(config.database_url as string)
-    logger.info('Database is connceted Successfully')
+    await mongoose.connect(config.database_url as string);
+    logger.info('Database is connceted Successfully');
     server = app.listen(config.port, () => {
-      logger.info(`Example app listening on port ${config.port}`)
-    })
+      logger.info(`Example app listening on port ${config.port}`);
+    });
   } catch (err: any) {
-    errorlogger.error('Database is not connceted', err)
+    errorlogger.error('Database is not connceted', err);
   }
-  process.on('unhandledRejection', err => {
+
+  process.on('unhandledRejection', error => {
     if (server) {
       server.close(() => {
-        errorlogger.error(err)
-        process.exit(1)
-      })
+        errorlogger.error(error);
+        process.exit(1);
+      });
     } else {
-      process.exit(1)
+      process.exit(1);
     }
-  })
+  });
 }
-bootstrap()
+bootstrap();
+
+process.on('SIGTERM', () => {
+  logger.info('SIGTERM is a received');
+  if (server) {
+    server.close();
+  }
+});
