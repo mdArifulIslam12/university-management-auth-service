@@ -16,8 +16,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/v1', routes);
 
 // testing
-// app.get('/', (req: Request, res: Response, next: NextFunction) => {
-// Promise.reject(new Error('Unhanlder error'))
+// app.get('/', async (req: Request, res: Response, next: NextFunction) => {
+//   next(Promise.reject(new Error('Unhanlder error')));
 // throw new Error('this not able');
 // throw new ApiError(400, 'dessfd sdfdsfsd ');
 // res.send('sdfsdf')
@@ -27,14 +27,15 @@ app.use('/api/v1', routes);
 app.use(gobalErrorHandler);
 
 // handle not route
+
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.status(httpStatus.NOT_FOUND).json({
     success: false,
-    message: 'University route not found!',
-    errorMessage: [
+    message: 'Not Found',
+    errorMessages: [
       {
         path: req.originalUrl,
-        message: 'Api not found!',
+        message: 'API Not Found',
       },
     ],
   });

@@ -209,6 +209,41 @@
             "date": 1686546001954,
             "name": "F:\\level-2\\university-management-project\\logs\\winston\\successes\\phu-2023-12-06-11-success.log",
             "hash": "24d6598e206c1f5e88708c66e304154244881e6ccab9d16f5c14c1104762efb9"
+        },
+        {
+            "date": 1686550050328,
+            "name": "F:\\level-2\\university-management-project\\logs\\winston\\successes\\phu-2023-12-06-12-success.log",
+            "hash": "ed830d6cc82c0dcc04a6136b54fe15ad39206e9166ade5cc11d591b374c0168c"
+        },
+        {
+            "date": 1686553655472,
+            "name": "F:\\level-2\\university-management-project\\logs\\winston\\successes\\phu-2023-12-06-13-success.log",
+            "hash": "3c94841b1b29566e4186155f0368873609631623f84f61dca4c5f0c25ba764fc"
+        },
+        {
+            "date": 1686562927676,
+            "name": "F:\\level-2\\university-management-project\\logs\\winston\\successes\\phu-2023-12-06-15-success.log",
+            "hash": "1fcd3c3c51ef2b50c20f1dd447803e34a67b5f9ea4686ee0cac409c54bdba61e"
+        },
+        {
+            "date": 1686564055194,
+            "name": "F:\\level-2\\university-management-project\\logs\\winston\\successes\\phu-2023-12-06-16-success.log",
+            "hash": "ebbc6ca7f0f405d38fdb99c8011a7005456c552ca4eb995ff293645a3e06901b"
+        },
+        {
+            "date": 1686587777080,
+            "name": "F:\\level-2\\university-management-project\\logs\\winston\\successes\\phu-2023-12-06-22-success.log",
+            "hash": "ac892b231eba5dd9f58af75bb359464d588520304bea3f5fa01ef6523e917509"
+        },
+        {
+            "date": 1686589322501,
+            "name": "F:\\level-2\\university-management-project\\logs\\winston\\successes\\phu-2023-12-06-23-success.log",
+            "hash": "8bec2d1351701eda35befabbe8920a1582b8a9dc1a5d7e9d7dd580cf49630950"
+        },
+        {
+            "date": 1686592867136,
+            "name": "F:\\level-2\\university-management-project\\logs\\winston\\successes\\phu-2023-13-06-00-success.log",
+            "hash": "2fff80fe7ac4f68ae5f0b57262772bbcd207f1c7c6def359a9ff9335e45ad87a"
         }
     ],
     "hashType": "sha256"
