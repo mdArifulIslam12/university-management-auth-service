@@ -6,7 +6,7 @@ import { AcademicFacultyService } from './academicFaculty.service';
 import { IAcademicFaculty } from './academicFaculty.interface';
 import pick from '../../../shared/pick';
 import { facultyOfFields } from './academicFaculty.constant';
-import { paginationFields } from '../constants/pagination';
+import { paginationFields } from '../../../constants/pagination';
 
 const createFaculty = catchAsync(async (req: Request, res: Response) => {
   const { ...academicFacultyData } = req.body;

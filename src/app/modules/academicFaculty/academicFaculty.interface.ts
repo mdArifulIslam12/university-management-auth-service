@@ -8,4 +8,4 @@ export type IAcademicFacltyFilters = {
   searchTerm?: string;
 };
 
-export const AcademicFacultyModel = Model<IAcademicFaculty>;
+export type AcademicFacultyModel = Model<IAcademicFaculty, object>;

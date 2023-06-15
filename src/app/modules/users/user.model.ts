@@ -16,9 +16,24 @@ const UserSchema = new Schema<IUser>(
       type: String,
       required: true,
     },
+    student: {
+      type: Schema.Types.ObjectId,
+      ref: 'Student',
+    },
+    // faculty: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: 'Student',
+    // },
+    // admin: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: 'admin',
+    // },
   },
   {
     timestamps: true,
+    toJSON: {
+      virtuals: true,
+    },
   }
 );
 

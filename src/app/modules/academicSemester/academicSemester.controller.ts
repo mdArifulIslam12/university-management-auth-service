@@ -5,7 +5,7 @@ import sendRseponse from '../../../shared/sendResponse';
 import httpStatus from 'http-status';
 import { IAcademicSemester } from './academicSemester.interface';
 import pick from '../../../shared/pick';
-import { paginationFields } from '../constants/pagination';
+import { paginationFields } from '../../../constants/pagination';
 import { filterOfFields } from './academicSemester.constant';
 
 const createAcademicSemester = catchAsync(
