@@ -9,3 +9,20 @@ export const studentBloodGroup = [
   'O+',
   'O-',
 ];
+
+export const studentSearchableFields = [
+  'id',
+  'email',
+  'name.firstName',
+  'name.middleName',
+  'name.lastName',
+];
+
+export const studentFilterFields = [
+  'searchTerm',
+  'id',
+  'bloodGroup',
+  'email',
+  'contactNo',
+  'emergencyContactNo',
+];

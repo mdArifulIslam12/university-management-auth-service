@@ -41,4 +41,4 @@ export const academicSemesterTitlesCodesMapper: {
 
 export const academicSemesterSearchableFields = ['title', 'code', 'year'];
 
-export const filterOfFields = ['searchTerm', 'title', 'code', 'year'];
+export const semesterfilterOfFields = ['searchTerm', 'title', 'code', 'year'];
