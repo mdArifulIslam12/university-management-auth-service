@@ -10,7 +10,6 @@ import { AdminService } from './admin.service';
 
 const getAllAdmin = catchAsync(async (req: Request, res: Response) => {
   const filters = pick(req.query, adminFilterFields);
-
   const paginationOptions = pick(req.query, paginationFields);
 
   const result = await AdminService.getAllAdmin(filters, paginationOptions);

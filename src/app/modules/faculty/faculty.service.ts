@@ -8,6 +8,8 @@ import httpStatus from 'http-status';
 import { IFaculty, IFacultyFilter } from './faculty.interface';
 import { Faculty } from './faculty.model';
 import { facultySearchableFields } from './faculty.constant';
+import mongoose from 'mongoose';
+import { User } from '../users/user.model';
 
 const getAllFaculty = async (
   filters: IFacultyFilter,
@@ -116,10 +118,29 @@ const updateFaculty = async (id: string, payload: Partial<IFaculty>) => {
 };
 
 const deleteFaculty = async (id: string): Promise<IFaculty | null> => {
-  const result = await Faculty.findByIdAndDelete(id)
-    .populate('academicFaculty')
-    .populate('academicDepartment');
-  return result;
+  const isExist = await Faculty.findOne({ id });
+  if (!isExist) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Faculty is not found!');
+  }
+  const session = await mongoose.startSession();
+  try {
+    session.startTransaction();
+    const faculty = await Faculty.findOneAndDelete({ id }, { session });
+    if (!faculty) {
+      throw new ApiError(
+        httpStatus.BAD_REQUEST,
+        'Faculty is do not delete successfully!'
+      );
+    }
+    await User.deleteOne({ id });
+    await session.commitTransaction();
+    await session.endSession();
+    return faculty;
+  } catch (error) {
+    await session.abortTransaction();
+    await session.endSession();
+    throw error;
+  }
 };
 
 export const FacultyService = {

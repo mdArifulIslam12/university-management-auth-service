@@ -25,6 +25,7 @@ const createStudent = async (
   if (!user.password) {
     user.password = config.default_student_pass as string;
   }
+
   // role
   user.role = 'student';
   // get academicSemester
@@ -89,6 +90,7 @@ const createFaculty = async (
   if (!user.password) {
     user.password = config.default_faculty_pass as string;
   }
+
   // role
   user.role = 'faculty';
   let newUserAllData = null;
@@ -145,6 +147,7 @@ const createAdmin = async (
   if (!user.password) {
     user.password = config.default_faculty_pass as string;
   }
+
   // role
   user.role = 'admin';
   let newUserAllData = null;
@@ -179,7 +182,9 @@ const createAdmin = async (
     throw error;
   }
   if (newUserAllData) {
-    newUserAllData = await User.findOne({ id: newUserAllData.id });
+    newUserAllData = await User.findOne({ id: newUserAllData.id }).populate(
+      'admin'
+    );
   }
   return newUserAllData;
 };

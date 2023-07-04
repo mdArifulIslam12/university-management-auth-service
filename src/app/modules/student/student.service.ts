@@ -2,12 +2,13 @@
 import { IPaginationOptions } from '../../../interface/pagination';
 import { IGenricResponse } from '../../../interface/common';
 import { paginationHelpers } from '../../../helpers/paginationHelper';
-import { SortOrder } from 'mongoose';
+import mongoose, { SortOrder } from 'mongoose';
 import { studentSearchableFields } from './student.constant';
 import { IStudent, IStudentFilter } from './student.interface';
 import { Student } from './student.model';
 import ApiError from '../../../errors/ApiError';
 import httpStatus from 'http-status';
+import { User } from '../users/user.model';
 
 const getAllStudent = async (
   filters: IStudentFilter,
@@ -132,11 +133,29 @@ const updateStudent = async (id: string, payload: Partial<IStudent>) => {
 };
 
 const deleteStudent = async (id: string): Promise<IStudent | null> => {
-  const result = await Student.findByIdAndDelete(id)
-    .populate('academicFaculty')
-    .populate('academicDepartment')
-    .populate('academicSemester');
-  return result;
+  const isExist = await Student.findOne({ id });
+  if (!isExist) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Student is not found!');
+  }
+  const session = await mongoose.startSession();
+  try {
+    session.startTransaction();
+    const student = await Student.findOneAndDelete({ id }, { session });
+    if (!student) {
+      throw new ApiError(
+        httpStatus.BAD_REQUEST,
+        'Student is do not delete successfully!'
+      );
+    }
+    await User.deleteOne({ id });
+    await session.commitTransaction();
+    await session.endSession();
+    return student;
+  } catch (error) {
+    await session.abortTransaction();
+    await session.endSession();
+    throw error;
+  }
 };
 
 export const StudentServeice = {
