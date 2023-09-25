@@ -9,7 +9,7 @@ import config from '../../../config';
 const createAuth = catchAsync(async (req: Request, res: Response) => {
   const { ...authData } = req.body;
   const result = await AuthService.loginUser(authData);
-  const { refreshToken, ...others } = result;
+  const { refreshToken } = result;
 
   const options = {
     secure: config.env === 'production',
@@ -27,7 +27,7 @@ const createAuth = catchAsync(async (req: Request, res: Response) => {
     statusCode: httpStatus.OK,
     success: true,
     message: 'User is successfully login',
-    data: others,
+    data: result,
   });
 });
 const refreshToken = catchAsync(async (req: Request, res: Response) => {

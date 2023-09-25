@@ -7,9 +7,13 @@ import ApiError from '../../../errors/ApiError';
 import httpStatus from 'http-status';
 import { IFaculty, IFacultyFilter } from './faculty.interface';
 import { Faculty } from './faculty.model';
-import { facultySearchableFields } from './faculty.constant';
+import {
+  EVENT_FACULTY_UPDATED,
+  facultySearchableFields,
+} from './faculty.constant';
 import mongoose from 'mongoose';
 import { User } from '../users/user.model';
+import { RedisClient } from '../../../shared/redis';
 
 const getAllFaculty = async (
   filters: IFacultyFilter,
@@ -113,7 +117,12 @@ const updateFaculty = async (id: string, payload: Partial<IFaculty>) => {
 
   const result = await Faculty.findOneAndUpdate({ id }, updateFacultyData, {
     new: true,
-  });
+  })
+    .populate('academicFacutly')
+    .populate('academicDepartment');
+  if (result) {
+    await RedisClient.publish(EVENT_FACULTY_UPDATED, JSON.stringify(result));
+  }
   return result;
 };
 

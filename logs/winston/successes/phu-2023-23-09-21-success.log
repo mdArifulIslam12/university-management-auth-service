@@ -1,0 +1,12 @@
+{
+  message: 'Database is connceted Successfully',
+  level: 'info',
+  label: 'AR',
+  timestamp: '2023-09-23T15:06:55.753Z'
+}
+{
+  message: 'Example app listening on port 3001',
+  level: 'info',
+  label: 'AR',
+  timestamp: '2023-09-23T15:06:55.784Z'
+}

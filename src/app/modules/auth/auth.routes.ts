@@ -9,7 +9,7 @@ const router = Router();
 
 router.post(
   '/login',
-  vaildateRequest(AuthZodValidation.createAuthSchema),
+  vaildateRequest(AuthZodValidation.loginUser),
   AuthController.createAuth
 );
 router.post(
